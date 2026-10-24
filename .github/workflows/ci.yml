@@ -1,0 +1,49 @@
+# Offline CI: lint, tests (including a headless Chromium test against a real local server), real
+# test count, doc drift, brand check and a full-history secret scan. No paid services, no GPU.
+# Actions are pinned to commit SHAs (Dependabot bumps them).
+name: ci
+on:
+  push: { branches: [main] }
+  pull_request:
+permissions:
+  contents: read
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with: { python-version: "3.13", cache: pip }
+      - name: Install the package with dev extras and headless Chromium
+        run: |
+          pip install -e ".[dev]"
+          python -m playwright install --with-deps chromium
+      - name: Lint
+        run: ruff check . && ruff format --check .
+      - name: Tests (browser tests must run here, not skip)
+        run: pytest -q -rs | tee pytest.log && ! grep -q "SKIPPED" pytest.log
+      - name: Test count (printed, not swallowed)
+        run: python scripts/count_tests.py
+      - name: Persona report
+        run: agentcommerce personas --out /tmp/persona_report.json
+      - name: Streaming benchmark on the CI runner (printed, not compared)
+        run: agentcommerce bench --runs 10 --out /tmp/stream_bench.json
+      - name: README and docs numbers match a fresh run
+        run: python scripts/render_docs.py --check
+      - name: Brand check (hashed blocklist)
+        run: python scripts/check_brands.py
+
+  secrets:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with: { fetch-depth: 0 }
+      - name: gitleaks (full history)
+        uses: gitleaks/gitleaks-action@ff98106e4c7b2bc287b24eaf42907196329070c7 # v2.3.9
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

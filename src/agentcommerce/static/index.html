@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fernhill Market shopping agent (demo)</title>
+  <link rel="stylesheet" href="/app.css">
+</head>
+<body>
+  <main>
+    <h1>Shopping agent <small>demo, fictional store, test card only</small></h1>
+    <div id="log" aria-live="polite"></div>
+    <div id="approval" hidden>
+      <p id="approval-text"></p>
+      <button id="approve" type="button">Approve</button>
+      <button id="reject" type="button">Reject</button>
+    </div>
+    <form id="form">
+      <input id="msg" autocomplete="off" maxlength="2000" placeholder="Try: buy a headlamp" aria-label="message">
+      <button id="send" type="submit">Send</button>
+      <button id="cancel" type="button" disabled>Stop</button>
+    </form>
+    <p id="status"></p>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>

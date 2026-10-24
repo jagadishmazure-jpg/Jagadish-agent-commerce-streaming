@@ -1,0 +1,64 @@
+{
+  "config": {
+    "first_token_delay_ms": 120.0,
+    "token_delay_ms": 20.0,
+    "runs": 30
+  },
+  "machine": {
+    "python": "3.13.5",
+    "arch": "x86_64"
+  },
+  "http_client": {
+    "ttft": {
+      "p50_ms": 123.5,
+      "p95_ms": 124.6,
+      "min_ms": 123.0,
+      "n": 30
+    },
+    "total": {
+      "p50_ms": 430.0,
+      "p95_ms": 450.7,
+      "min_ms": 408.1,
+      "n": 30
+    },
+    "tokens_per_reply_mean": 16
+  },
+  "cancel": {
+    "cancel_to_stop": {
+      "p50_ms": 21.1,
+      "p95_ms": 21.8,
+      "min_ms": 20.4,
+      "n": 20
+    },
+    "tokens_received_mean": 4
+  },
+  "browser": {
+    "ttft": {
+      "p50_ms": 122.8,
+      "p95_ms": 123.9,
+      "min_ms": 122.5,
+      "n": 20
+    },
+    "total": {
+      "p50_ms": 428.7,
+      "p95_ms": 448.7,
+      "min_ms": 407.1,
+      "n": 20
+    }
+  },
+  "zero_delay_overhead": {
+    "ttft": {
+      "p50_ms": 2.4,
+      "p95_ms": 3.5,
+      "min_ms": 1.8,
+      "n": 30
+    },
+    "total": {
+      "p50_ms": 3.8,
+      "p95_ms": 5.0,
+      "min_ms": 2.8,
+      "n": 30
+    },
+    "tokens_per_reply_mean": 16
+  }
+}

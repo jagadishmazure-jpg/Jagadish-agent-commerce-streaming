@@ -1,0 +1,12 @@
+body { font-family: system-ui, sans-serif; margin: 0; background: #f6f7f4; }
+main { max-width: 720px; margin: 2rem auto; padding: 0 1rem; }
+h1 small { font-size: 0.6em; color: #666; font-weight: normal; }
+#log { background: white; border: 1px solid #ddd; border-radius: 6px; min-height: 260px; padding: 0.75rem; }
+.msg { margin: 0.4rem 0; white-space: pre-wrap; }
+.user { color: #234; font-weight: 600; }
+.agent { color: #111; }
+.tool { color: #6a5d00; font-family: ui-monospace, monospace; font-size: 0.85em; }
+.guard { color: #a00; font-size: 0.85em; }
+#approval { border: 2px solid #c80; background: #fff8e6; padding: 0.5rem 0.75rem; margin: 0.5rem 0; border-radius: 6px; }
+form { display: flex; gap: 0.5rem; margin-top: 0.75rem; }
+#msg { flex: 1; padding: 0.5rem; }
