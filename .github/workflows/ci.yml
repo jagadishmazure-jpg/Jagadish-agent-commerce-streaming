@@ -25,7 +25,10 @@ jobs:
       - name: Lint
         run: ruff check . && ruff format --check .
       - name: Tests (browser tests must run here, not skip)
-        run: pytest -q -rs | tee pytest.log && ! grep -q "SKIPPED" pytest.log
+        run: |
+          set -o pipefail
+          pytest -q -rs | tee pytest.log
+          ! grep -q "SKIPPED" pytest.log
       - name: Test count (printed, not swallowed)
         run: python scripts/count_tests.py
       - name: Persona report
