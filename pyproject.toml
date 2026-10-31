@@ -9,7 +9,7 @@ description = "Mock agent payments with signed mandates, plus a streaming chat U
 requires-python = ">=3.11"
 license = { text = "MIT" }
 # Pinned to the tested minor versions: newer Starlette deprecates its httpx test client.
-dependencies = ["fastapi>=0.115,<0.116", "uvicorn>=0.34,<0.35", "httpx>=0.28,<0.29"]
+dependencies = ["fastapi>=0.115,<0.163", "uvicorn>=0.34,<0.35", "httpx>=0.28,<0.29"]
 
 [project.optional-dependencies]
 dev = ["pytest>=8", "ruff>=0.6", "playwright>=1.45"]
